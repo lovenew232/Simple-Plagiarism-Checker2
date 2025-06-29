@@ -1,0 +1,197 @@
+/* Reset a few defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Background + font */
+body {
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+  font-family: Arial, sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Centered white "card" */
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Title */
+.container h1 {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+/* Label */
+label {
+  display: block;
+  text-align: left;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+/* Textarea styling */
+textarea {
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  resize: vertical;
+  outline: none;
+  color: #333;
+  background: #fff;
+}
+
+/* Button styling */
+button {
+  margin-top: 1rem;
+  background-color: #e74c3c;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #c0392b;
+}
+
+button:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* ───────── Circular + Progress‐box Styles ───────── */
+/* Container under the button: hidden until output exists */
+.progress-box {
+  margin-top: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-between;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.5s ease;
+}
+
+.progress-box.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* LEFT side: textual match message */
+.progress-message {
+  flex: 1;
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+/* RIGHT side: container for SVG + percentage text */
+.progress-circle-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+}
+
+/* Rotate so that 0% is at 12 o'clock */
+.progress-ring {
+  transform: rotate(-90deg);
+}
+
+/* Gray "track" circle: always fully visible */
+.progress-ring__track {
+  stroke-linecap: round;
+}
+
+/* Red "progress" circle: hidden at 0% */
+.progress-ring__circle {
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+/* Numeric percentage positioned at center of SVG */
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  font-weight: normal;
+  color: #fff;
+  user-select: none;
+  pointer-events: none;
+  text-align: center;
+  line-height: 1;
+}
+
+/* Loading state */
+.loading {
+  opacity: 0.7;
+}
+
+.loading button {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* Error state */
+.error .progress-message {
+  color: #e74c3c;
+}
+
+/* Success state */
+.success .progress-ring__circle {
+  stroke: #27ae60;
+}
+
+/* Warning state */
+.warning .progress-ring__circle {
+  stroke: #f39c12;
+}
+
+/* High similarity (error) state */
+.high-similarity .progress-ring__circle {
+  stroke: #e74c3c;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .container {
+    width: 95%;
+    padding: 1.5rem;
+  }
+  
+  .progress-box {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+  
+  .progress-message {
+    text-align: center;
+  }
+}
